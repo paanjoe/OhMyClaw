@@ -1,6 +1,6 @@
 # OhMyClaw
 
-Replicate [SimpleClaw](https://www.simpleclaw.com/): deploy OpenClaw under 1 minute — landing page, model/channel selection, Sign in with Google, and deployment flow.
+Deploy OpenClaw under 1 minute — landing page, model/channel selection, Sign in with Google, and deployment flow.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
