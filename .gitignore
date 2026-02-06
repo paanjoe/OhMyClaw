@@ -30,6 +30,10 @@ pnpm-debug.log*
 # Vercel
 .vercel
 
+# OpenNext / Cloudflare
+.open-next
+.wrangler
+
 .cursorrule
 
 /.cursor

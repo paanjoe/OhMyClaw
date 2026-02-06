@@ -6,7 +6,8 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "dev:web": "turbo run dev --filter=web",
-    "dev:api": "turbo run dev --filter=api"
+    "dev:api": "turbo run dev --filter=api",
+    "deploy:web": "pnpm --filter web run deploy"
   },
   "devDependencies": {
     "turbo": "^2.3.0"
