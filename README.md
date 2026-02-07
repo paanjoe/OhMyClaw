@@ -31,11 +31,33 @@ If the app won’t start, run `pnpm install` from the repo root (or `pnpm instal
 
 The web app is set up for [Cloudflare Workers](https://workers.cloudflare.com/) via [OpenNext](https://opennext.js.org/cloudflare).
 
-1. **Install deps** (from repo root): `pnpm install`
-2. **Log in to Cloudflare** (from root): `pnpm --filter web exec wrangler login` — or from `apps/web`: `pnpm exec wrangler login`
-3. **Create R2 bucket** (one-time): `pnpm --filter web exec wrangler r2 bucket create ohmyclaw-web-next-cache`
-4. **Deploy**: from root `pnpm deploy:web` or from `apps/web` run `pnpm run deploy`
-5. **Env vars** (optional): Set `NEXT_PUBLIC_API_URL` in [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages → your worker → Settings → Variables, or in `.dev.vars` for local preview.
+### One-time setup (Cloudflare)
+
+1. **Log in**: `pnpm --filter web exec wrangler login`
+2. **Create R2 bucket**: `pnpm --filter web exec wrangler r2 bucket create ohmyclaw-web-next-cache`
+3. **Account ID**: In [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages → Overview, copy your **Account ID**.
+
+### Deploy from your machine
+
+From repo root: `pnpm deploy:web` (or from `apps/web`: `pnpm run deploy`).
+
+### Deploy via CI/CD (GitHub Actions)
+
+Push to `main` (or run the workflow manually) to deploy.
+
+**Required repo secrets** (GitHub → repo → Settings → Secrets and variables → Actions):
+
+| Secret | Description |
+|--------|-------------|
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account ID |
+| `CLOUDFLARE_API_TOKEN` | API token with “Edit Cloudflare Workers” (Create Token → Edit Cloudflare Workers template) |
+| `NEXT_PUBLIC_API_URL` | (Optional) API base URL for the frontend, e.g. `https://api.ohmyclaw.com` |
+
+Workflow file: [.github/workflows/deploy-cloudflare.yml](.github/workflows/deploy-cloudflare.yml).
+
+### Env vars in Cloudflare
+
+After deploy, you can override env (e.g. `NEXT_PUBLIC_API_URL`) in Dashboard → Workers & Pages → **ohmyclaw-web** → Settings → Variables.
 
 See [OpenNext Cloudflare get started](https://opennext.js.org/cloudflare/get-started) for details.
 

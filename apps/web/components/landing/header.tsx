@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Github } from "lucide-react";
 import { COPY } from "@/lib/copy";
+import { NavAuth } from "./nav-auth";
 
 export function Header() {
   return (
@@ -12,29 +12,7 @@ export function Header() {
         >
           {COPY.site.brand}
         </Link>
-        <nav className="flex items-center gap-6" aria-label="Main">
-          <Link
-            href="/pricing"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {COPY.site.nav.pricing}
-          </Link>
-          <Link
-            href="/contact"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {COPY.site.nav.contactSupport}
-          </Link>
-          <a
-            href={COPY.site.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-            aria-label="GitHub (open source)"
-          >
-            <Github className="h-5 w-5" />
-          </a>
-        </nav>
+        <NavAuth />
       </div>
     </header>
   );

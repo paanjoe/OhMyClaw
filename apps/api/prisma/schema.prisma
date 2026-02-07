@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  name         String?
+  avatarUrl    String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  deployments  Deployment[]
+
+  @@map("users")
+}
+
+model Deployment {
+  id                    String   @id @default(cuid())
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  modelId               String
+  channelId             String
+  status                String   @default("pending") // pending | bot_connected | user_confirmed
+  telegramBotToken      String?
+  telegramWebhookSecret  String?
+  telegramUserId        String?
+  telegramUsername      String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([userId])
+  @@map("deployments")
+}
