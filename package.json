@@ -7,7 +7,9 @@
     "lint": "turbo run lint",
     "dev:web": "turbo run dev --filter=web",
     "dev:api": "turbo run dev --filter=api",
-    "deploy:web": "pnpm --filter web run deploy"
+    "deploy:web": "pnpm --filter web run deploy",
+    "build:web:cf": "pnpm --filter web exec opennextjs-cloudflare build",
+    "deploy:web:cf": "pnpm --filter web exec wrangler deploy"
   },
   "devDependencies": {
     "turbo": "^2.3.0"

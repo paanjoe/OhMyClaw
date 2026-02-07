@@ -41,6 +41,17 @@ The web app is set up for [Cloudflare Workers](https://workers.cloudflare.com/) 
 
 From repo root: `pnpm deploy:web` (or from `apps/web`: `pnpm run deploy`).
 
+### Deploy via CI/CD (Cloudflare Workers & Pages)
+
+If you connected the repo in **Cloudflare Dashboard** → Workers & Pages:
+
+1. **Build command:** `corepack enable && pnpm install && pnpm run build:web:cf`
+2. **Deploy command:** `pnpm run deploy:web:cf`
+3. **Root directory:** `/` (repo root)
+4. **Variables:** Add `NEXT_PUBLIC_API_URL` (your API URL) and optionally `NODE_VERSION=20`.
+
+See **[docs/CLOUDFLARE_CICD.md](docs/CLOUDFLARE_CICD.md)** for full settings and troubleshooting.
+
 ### Deploy via CI/CD (GitHub Actions)
 
 Push to `main` (or run the workflow manually) to deploy.
