@@ -51,6 +51,8 @@ const config: Config = {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
+  			'accent-red': 'hsl(var(--accent-red))',
+  			'accent-teal': 'hsl(var(--accent-teal))',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
@@ -59,6 +61,9 @@ const config: Config = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		}
+  		},
+  		backgroundImage: {
+  			'gradient-brand': 'linear-gradient(to right, hsl(var(--accent-red)), hsl(var(--accent-teal)))',
   		},
   		keyframes: {
   			marquee: {

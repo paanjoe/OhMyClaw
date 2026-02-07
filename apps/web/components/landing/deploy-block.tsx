@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { ModelId, ChannelId } from "shared";
 import { cn } from "@/lib/utils";
+import { COPY } from "@/lib/copy";
 
 const MODELS: { id: ModelId; label: string; icon: LucideIcon }[] = [
   { id: "claude-opus-4.5", label: "Claude Opus 4.5", icon: Sparkles },
@@ -43,13 +44,12 @@ export function DeployBlock() {
       {/* Subtitle + Sign in with Google — right under the headline for easy click */}
       <div className="flex flex-col items-center gap-4 pt-4">
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          Avoid all technical complexity and one-click deploy your own 24/7
-          active OpenClaw instance under 1 minute.
+          {COPY.hero.subtitle}
         </p>
         <div className="flex flex-col items-center gap-2">
           <Button
             size="lg"
-            className="min-w-[260px] gap-2 font-heading text-base sm:min-w-[280px]"
+            className="min-w-[260px] gap-2 font-heading text-base shadow-[0_0_24px_-4px_hsl(var(--primary)/0.4)] sm:min-w-[280px]"
             asChild
           >
             <a href={authUrl}>
@@ -71,21 +71,18 @@ export function DeployBlock() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              Sign in with Google
+              {COPY.deploy.signInWithGoogle}
             </a>
           </Button>
-          <p className="text-xs text-muted-foreground">
-            Sign in to deploy your AI assistant and connect your channels.
-          </p>
-          <p className="text-xs text-muted-foreground/80">
-            Checking availability…
+          <p className="text-xs text-muted-foreground mt-5">
+            {COPY.deploy.signInHint}
           </p>
         </div>
       </div>
 
       <div className="space-y-4 text-center">
         <h2 className="font-heading text-xl font-semibold tracking-tight text-muted-foreground">
-          Which model do you want as default?
+          {COPY.deploy.modelQuestion}
         </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {MODELS.map((m) => (
@@ -111,7 +108,7 @@ export function DeployBlock() {
 
       <div className="space-y-4 text-center">
         <h2 className="font-heading text-xl font-semibold tracking-tight text-muted-foreground">
-          Which channel do you want to use for sending messages?
+          {COPY.deploy.channelQuestion}
         </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {CHANNELS.map((c) => (
@@ -132,7 +129,7 @@ export function DeployBlock() {
                     variant="secondary"
                     className="absolute right-2 top-2 text-[10px]"
                   >
-                    Coming soon
+                    {COPY.deploy.comingSoon}
                   </Badge>
                 )}
                 <c.icon className="h-8 w-8 text-primary" />

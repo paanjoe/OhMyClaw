@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { COPY } from "@/lib/copy";
+import { Header } from "@/components/landing/header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "OhMyClaw — Deploy OpenClaw under 1 Minute",
-  description:
-    "Avoid all technical complexity and one click deploy your own 24/7 active OpenClaw instance under 1 minute.",
+  title: COPY.site.title,
+  description: COPY.site.description,
 };
 
 export default function RootLayout({
@@ -23,6 +24,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <Header />
         {children}
       </body>
     </html>

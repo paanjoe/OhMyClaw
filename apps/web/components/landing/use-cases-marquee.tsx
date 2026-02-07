@@ -1,54 +1,15 @@
-const USE_CASES = [
-  "Read & summarize email",
-  "Draft replies and follow-ups",
-  "Translate messages in real time",
-  "Organize your inbox",
-  "Answer support tickets",
-  "Summarize long documents",
-  "Notify before a meeting",
-  "Schedule meetings from chat",
-  "Remind you of deadlines",
-  "Plan your week",
-  "Take meeting notes",
-  "Sync across time zones",
-  "Do your taxes",
-  "Track expenses and receipts",
-  "Compare insurance quotes",
-  "Manage subscriptions",
-  "Run payroll calculations",
-  "Negotiate refunds",
-  "Find coupons",
-  "Find best prices online",
-  "Find discount codes",
-  "Price-drop alerts",
-  "Compare product specs",
-  "Negotiate deals",
-  "Write contracts and NDAs",
-  "Research competitors",
-  "Screen and prioritize leads",
-  "Generate invoices",
-  "Create presentations from bullet points",
-  "Book travel and hotels",
-  "Find recipes from ingredients",
-  "Draft social posts",
-  "Monitor news and alerts",
-  "Set and track goals",
-  "Screen cold outreach",
-  "Draft job descriptions",
-  "Run standup summaries",
-  "Track OKRs and KPIs",
-];
+import { COPY } from "@/lib/copy";
 
 export function UseCasesMarquee() {
-  const duplicated = [...USE_CASES, ...USE_CASES];
+  const duplicated = [...COPY.useCases.items, ...COPY.useCases.items];
   return (
     <section className="overflow-hidden border-t border-border/50 py-16">
       <div className="mb-8 text-center">
         <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl">
-          What can OpenClaw do for you?
+          {COPY.useCases.heading}
         </h2>
         <p className="mt-2 text-muted-foreground">
-          One assistant, thousands of use cases
+          {COPY.useCases.subheading}
         </p>
       </div>
       <div className="relative flex w-full">
@@ -64,7 +25,7 @@ export function UseCasesMarquee() {
         </div>
       </div>
       <p className="mt-8 text-center text-sm text-muted-foreground">
-        You can add as many use cases as you want via natural language.
+        {COPY.useCases.footnote}
       </p>
     </section>
   );
