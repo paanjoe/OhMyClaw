@@ -25,17 +25,17 @@ The web app uses **OpenNext for Cloudflare**, not a plain Next.js build. Use:
 - In **Settings** → **Environment variables** (or your build env), set **NODE_VERSION** = `20` if your provider uses it to choose the Node version.
 - The repo includes a `.nvmrc` with `20` for environments that read it.
 
-## 4. Variables and secrets
+## 4. Variables and secrets (required)
 
-Add at least:
+Add these in **Settings** → **Variables and Secrets** for the Worker:
 
 | Name | Value | Notes |
 |------|--------|--------|
-| `NEXT_PUBLIC_API_URL` | `https://your-api-url.com` | Your API base URL (no trailing slash). Used at **build** time. |
+| `NEXT_PUBLIC_API_URL` | `https://your-api-url.com` | **Required.** Your production API URL (no trailing slash). If missing or wrong, the deployed app will call `localhost:3001` and auth will fail. Set this, then **trigger a new build** so it’s baked in. |
 | `NODE_VERSION` | `20` | If the build image doesn’t use `.nvmrc`. |
 
-- **Variables** are visible in the dashboard and in build logs; use **Secrets** for anything sensitive.
-- Add these under **Settings** → **Variables and Secrets** for the Worker/Pages project.
+- `NEXT_PUBLIC_*` values are embedded at **build time**. Changing them in the dashboard alone is not enough — you must **redeploy** (run a new build) after setting or changing `NEXT_PUBLIC_API_URL`.
+- Use **Secrets** for anything sensitive; normal variables can appear in build logs.
 
 ## 5. R2 bucket
 
@@ -43,7 +43,23 @@ Add at least:
 - Create it once (e.g. from your machine):  
   `pnpm --filter web exec wrangler r2 bucket create ohmyclaw-web-next-cache`
 
-## 6. If the build still fails
+## 6. Sign-in redirects to localhost
+
+After you deploy the **web** app to Cloudflare, Sign in must send users back to your Cloudflare URL, not localhost. That redirect is controlled by the **API** (backend).
+
+On the server where the **API** runs (Railway, Render, Fly.io, etc.), set:
+
+| Variable | Value |
+|----------|--------|
+| `FRONTEND_URL` | Your Cloudflare app URL, e.g. `https://ohmyclaw-web.xxx.workers.dev` (no trailing slash) |
+
+Then restart the API. After Google sign-in, users will be redirected to this URL instead of localhost.
+
+**API `.env` (production):** Set `OAUTH_CALLBACK_URL` to your **public** API URL + `/auth/callback`, e.g. `https://your-api.com/auth/callback` (or your ngrok URL if the API is local). This must match the URL you add in Google Cloud Console.
+
+**Google Cloud Console** → your OAuth client → **Authorized redirect URIs**: add that same callback URL (e.g. `https://d79a-xxx.ngrok-free.app/auth/callback` or your deployed API URL).
+
+## 7. If the build still fails
 
 - Open **“View build”** for the failed run and check the log.
 - Typical issues:
